@@ -1,5 +1,0 @@
-%We want to solve Az = b
-
-function [z] = solve_poisson(N)
-    delta_x = 1?
-end
