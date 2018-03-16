@@ -11,11 +11,12 @@ L_ud = zeros(1,N); %These arrays will hold the computed diagonals of L
 L_ld = zeros(1,N-1);
 
 for i = 1:N
-    L_ud(i) = sqrt((1+i)/i); 
+    L_ud(i) = sqrt((1+i)/i); %set upper diagonal elements
 end
 
 for i = 1:N-1
-    L_ld(i) = -sqrt((i)/(i+1)); %i is shifted one relative to L
+    L_ld(i) = -sqrt((i)/(i+1)); %set lower diagonal elements
+                                %i is shifted one relative to L
 end
 
 

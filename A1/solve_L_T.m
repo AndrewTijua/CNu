@@ -11,7 +11,7 @@ L_ld = zeros(1,N); %These arrays will hold the computed diagonals of L
 L_ud = zeros(1,N-1);
 
 for i = 1:N
-    L_ld(i) = sqrt((1+i)/i); 
+    L_ld(i) = sqrt((1+i)/i); %set upper diagonal elements
 end
 
 for i = 1:N-1

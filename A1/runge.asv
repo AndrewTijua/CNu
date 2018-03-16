@@ -1,0 +1,27 @@
+clear all;
+close all;
+
+x = linspace(-10,10,1000);
+i = 1:9;
+fi = zeros(1, size(xi,2));
+xi = (5/2) .* (i-1) - 10;
+fi = zeros(1, size(xi,2));
+fi = 1./(1+xi.^2);
+
+deg8poly = polyfit(xi, fi, 8);
+deg4lsqpoly = polyfit(xi, fi, 4);
+
+fx = 1./(1+x.^2);
+cubsplinevals = spline(xi, fi, x);
+deg8polyvals = polyval(deg8poly,x);
+deg4lsqpolyvals = polyval(deg4lsqpoly,x);
+
+hold on
+plot(x,fx,'r-') %plot x against fx with a red line
+plot(x,cubsplinevals,'g-') %plot x against splines with a green line
+plot(x,deg8polyvals,'b-') %plot x against deg8 poly with a blue line
+plot(x,deg4lsqpolyvals,'y-') %plot x against deg4 poly with a yellow line
+title('Comparison of Fits'); %set title
+xlabel('$x$','Interpreter','latex'); %set x axis label with latex
+ylabel('$f(x)$','Interpreter','latex');%set y axis label with latex
+hold off
