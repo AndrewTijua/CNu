@@ -8,8 +8,8 @@ xlabel('$x$','Interpreter','latex'); %lebel x axis
 ylabel('$\cos(\pi x)^3 + 0.01(x+2)^{(1/10)}$','Interpreter','latex'); %label y axis
 x_star_negative = fsolve(f, -0.25,optimset('Display','off'));%solve for negative root in x in -1, 1, display
 x_star_positive = fsolve(f, 0.25,optimset('Display','off'));%solve for positive root in x in -1, 1, display
-x_star_negative
-x_star_positive
+x_star_negative %display x_star_negative
+x_star_positive %display x_star_positive
 
 [x_n, n, x_fp] = fp_solve(f, -2/3);%use fixed point iteration as directed
 disp(sprintf('Fixed point: n=%d, x=%f',n,x_n)) %display nicely formatted output
