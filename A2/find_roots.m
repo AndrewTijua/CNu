@@ -13,8 +13,7 @@ x_star_positive
 
 [x_n, n, x_fp] = fp_solve(f, -2/3);%use fixed point iteration as directed
 disp(sprintf('Fixed point: n=%d, x=%f',n,x_n)) %display nicely formatted output
-%define first derivative of f for newton method
-df = @(x) 0.001.* (x + ones(size(x)).*2).^(-9/10) - 3.*pi.*sin(pi.*x).*(cos(pi.*x).^2);
+df = @(x) 0.001.* (x + ones(size(x)).*2).^(-9/10) - 3.*pi.*sin(pi.*x).*(cos(pi.*x).^2);%define first derivative of f for newton method
 
 [x_n, n, x_newton] = newton_solve(f, df, -2/3); %use newton raphson as directed
 disp(sprintf('Newton-Raphson: n=%d, x=%f',n,x_n))%display nicely formatted output
@@ -28,6 +27,12 @@ plot(0:6, abs(x_newton(1:7) - ones(size(0:6)).*x_star_positive)); %plot error in
 legend('fixed point error at xth iteration','newton error at xth iteration') %create legend
 hold off %stop adding to figure
 
+%From this we clearly see that the newton method converges incredibly
+%quickly compared to the fixed point method. The newton method takes 6
+%iterations and the fixed point method takes 34 iterations to get within
+%tolerance. Notice that 34 ~ 6^2. This is due to the newton method being a
+%second order method, whilst the given fixed point iteration is first order
+%(see lectures 9, 10). The newton method is faster almost always. 
 
 function [x_n, n, x_fp] = fp_solve(f, x_0) %fp iterative solver
 x_fp = zeros(1); %x_fp will be dynamically resized

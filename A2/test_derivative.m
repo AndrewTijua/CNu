@@ -20,10 +20,10 @@ error = abs(num_derivs - derivs) %display error magnitude
 %From these values we see that the smaller a value of dx that is given the
 %better approximation for F' we getuntile we get to dx^2 < 1e14 in which
 %case the error starts to increase again
-dxs = [1e-7, 1e-8, 1e-9, 1e-10, 1e-11, 1e-12, 1e-13, 1e-14, 1e-15];
-num_derivs = num_diff(F, ones(1,9).*(pi/2), dxs);
-derivs = ones(1,9).*dF(pi/2);
-error = abs(num_derivs - derivs)
+dxs = [1e-7, 1e-8, 1e-9, 1e-10, 1e-11, 1e-12, 1e-13, 1e-14, 1e-15]; %new array of dxs
+num_derivs = num_diff(F, ones(1,9).*(pi/2), dxs); %array of approximate derivatives for above dxs
+derivs = ones(1,9).*dF(pi/2); %array of exact derivatives for above dxs
+error = abs(num_derivs - derivs) %error in approximate derivatives above
 %As you can see the error begins to increase rapidly. This is in line iwth
 %what we know from lecture 7. This is due to floating point precision not
 %being enough at those levels. 

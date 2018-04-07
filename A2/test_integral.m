@@ -14,9 +14,9 @@ end
 
 
 %find weights for quadradure w_i = int(-1,1) l_i(x)dx
-w_i = zeros(1,5);
-for i = 1:5
-    w_i(i) = diff(polyval(polyint(l_i(i,:)), [0,1]));
+w_i = zeros(1,5); %initialise weights array
+for i = 1:5 %iterate over weights array
+    w_i(i) = diff(polyval(polyint(l_i(i,:)), [0,1])); %computes the weights as given in lecture 7 (adjusted for range) 
 end
 w_i
 
@@ -24,27 +24,27 @@ w_i
 f = @(x) sin(x) .* cos(x);
 %indef integral of f
 F = @(x) (-1/2) .* cos(x) .^2;
-F_exact = F(1) - F(0)
-F_approx = sum(w_i .* f(x_i))
-F_error = abs(F_exact - F_approx)
+F_exact = F(1) - F(0) %exact integral of f from 0 to 1
+F_approx = sum(w_i .* f(x_i)) %approximate integral of f from 0 to 1
+F_error = abs(F_exact - F_approx) %error in approximate integral
 %this is a pretty damn close approximation to the integral, especially as
 %only five points are used. Lets find the degree of precision
 
-exact = 1;
-degree = 0;
-while exact == 1
-    f = @(x) x.^degree;
-    F = @(x) (1/(degree + 1)) .* x.^(degree + 1);
-    F_exact = F(1) - F(0);
-    F_approx = sum(w_i .* f(x_i));
-    F_error = abs(F_exact - F_approx);
-    if F_error < 1e-12
-        degree = degree + 1;
-    else
-        exact = 0;
+exact = 1; %boolean flag to check if exact
+degree = 0; %star with 0 degree polys
+while exact == 1 %check we are still exact
+    f = @(x) x.^degree; %create polynomial of degree degree
+    F = @(x) (1/(degree + 1)) .* x.^(degree + 1); %integrate aforementioned polynomial
+    F_exact = F(1) - F(0); %exact integral of polynomial
+    F_approx = sum(w_i .* f(x_i)); %approximate integral of polynomial
+    F_error = abs(F_exact - F_approx); %error in approximation to integral
+    if F_error < 1e-12 %margin of error (for round off error)
+        degree = degree + 1; %increase degree by one, try again
+    else %this means that the integral is not exact
+        exact = 0; %set the boolean flag to 0 (false)
     end
 end
-degree - 1
+degree - 1 %diplay the degree - 1 as it failed on polynomial of degree degree
 %from this we see that the interpolation method has degree of precision 5,
 %as x^6 is not integrated exactly but x^0 through x^5 are. (Gladwell thm 5.2.1)
 
